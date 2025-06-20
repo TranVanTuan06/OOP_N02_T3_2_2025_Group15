@@ -14,26 +14,25 @@ Nhóm 15
 
 1. Các đối tượng chính cần phân tích
 a. Sản phẩm
-   Thuộc tính:
-   Tenmonid
-   Giá bán
-   Danh mục
-   Thành phần
-   Size
-   Options
-   Hình ảnh(minh họa)
+Tenmonid
+Giá bán
+Danh mục
+hành phần
+Size
+Options
+Hình ảnh(minh họa)
 b. Nguyên liệu
-   NguyenlieuID
-	  Tennguyenlieu
-	  Soluongton
-	  Đơn vị tính: kg, lít, gói, hộp.
-	  Gianhap
-	  Ngaynhap
+NguyenlieuID
+Tennguyenlieu
+Soluongton
+Đơn vị tính: kg, lít, gói, hộp.
+Gianhap
+Ngaynhap
 c. Khách hàng
-	  KhachhangID
-	  Ten
-	  Sodienthoai
-	  Lichsumuahang
+KhachhangID
+Ten
+Sodienthoai
+Lichsumuahang
 d. Đơn hàng
 	  DonhangID
    	  Chitietdon
