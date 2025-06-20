@@ -12,7 +12,7 @@ Nhóm 15
 
 ứng dụng: xây dựng ứng dụng quản lí quán nước
 
-1. các đối tượng phân tích
+các đối tượng phân tích
 a. sản phẩm
 tenmon
 giaban
