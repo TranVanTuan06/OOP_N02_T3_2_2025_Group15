@@ -12,43 +12,4 @@ Nhóm 15
 
 ứng dụng: xây dựng ứng dụng quản lí quán nước
 
-1. Các đối tượng chính cần phân tích
-a. Sản phẩm
-Tenmonid
-Giá bán
-Danh mục
-hành phần
-Size
-Options
-Hình ảnh(minh họa)
-b. Nguyên liệu
-NguyenlieuID
-Tennguyenlieu
-Soluongton
-Đơn vị tính: kg, lít, gói, hộp.
-Gianhap
-Ngaynhap
-c. Khách hàng
-KhachhangID
-Ten
-Sodienthoai
-Lichsumuahang
-d. Đơn hàng
-	  DonhangID
-   	  Chitietdon
-	  Tongtien
-	  Thoigiandat
-	  Phuongthucthanhtoan
-	  Loaidonhang
-	  Thongtingiaohang
-e. Nhân viên
-	  NhanvienID
-	  Tennhanvien
-	  Chucvu
-	  Thongtinlienhe
-	  Calamviec
- f. Kho
-	  KhoID
-	  Nguyenlieu
-	  Soluongton
-	  Lichsunhapxuat
+
