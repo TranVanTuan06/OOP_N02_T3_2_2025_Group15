@@ -23,37 +23,32 @@ a. Sản phẩm
    Options
    Hình ảnh(minh họa)
 b. Nguyên liệu
-  Thuộc tính:
-    NguyenlieuID
+   NguyenlieuID
 	  Tennguyenlieu
 	  Soluongton
 	  Đơn vị tính: kg, lít, gói, hộp.
 	  Gianhap
 	  Ngaynhap
 c. Khách hàng
-  Thuộc tính:
 	  KhachhangID
 	  Ten
 	  Sodienthoai
 	  Lichsumuahang
 d. Đơn hàng
-  Thuộc tính:
 	  DonhangID
-    Chitietdon
+   	  Chitietdon
 	  Tongtien
 	  Thoigiandat
 	  Phuongthucthanhtoan
 	  Loaidonhang
 	  Thongtingiaohang
 e. Nhân viên
-  Thuộc tính:
 	  NhanvienID
 	  Tennhanvien
 	  Chucvu
 	  Thongtinlienhe
 	  Calamviec
- f. Kho (Inventory)
-  Thuộc tính:
+ f. Kho
 	  KhoID
 	  Nguyenlieu
 	  Soluongton
