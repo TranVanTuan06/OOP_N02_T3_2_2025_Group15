@@ -19,9 +19,9 @@ public class ganbanchokhachService {
         }
     }
     public static void main(String[] args) {
-        ganbanchokhachService service = new ganbanchokhachService();
-        service.ganbanchokhach("KH01", "B01");
-        service.ganbanchokhach("KH02", "B01");
-        service.hienthidanhsachgan();
+    ganbanchokhachService service = new ganbanchokhachService();
+    service.ganbanchokhach("KH01", "B01");
+    service.ganbanchokhach("KH02", "B01");
+    service.hienthidanhsachgan();
     }
 }
