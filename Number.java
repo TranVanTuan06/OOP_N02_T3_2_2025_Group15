@@ -1,6 +1,6 @@
 public class Number {
     public int i;
-public static void test()throws Exception{
+    public static void test()throws Exception{
     Number n1 = new Number();
     Number n2 = new Number();
     n1.i=2;
