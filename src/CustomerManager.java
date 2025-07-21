@@ -12,16 +12,31 @@ public class CustomerManager {
     }
 
     public ArrayList<Customer> xoaKhachHang(String customerID) {
-        for (int i = 0; i < danhSachKhachHang.size(); i++) {
-            if (danhSachKhachHang.get(i).customerID.equals(customerID)) {
-                danhSachKhachHang.remove(i);
-                break;
+        try {
+            boolean found = false;
+            for (int i = 0; i < danhSachKhachHang.size(); i++) {
+                if (danhSachKhachHang.get(i).customerID.equalsIgnoreCase(customerID)) {
+                    danhSachKhachHang.remove(i);
+                    System.out.println("Đã xoá khách hàng có mã: " + customerID);
+                    found = true;
+                    break;
+                }
             }
+            if (!found) {
+                System.out.println("Không tìm thấy khách hàng với mã: " + customerID);
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi khi xoá khách hàng: " + e.getMessage());
         }
         return danhSachKhachHang;
     }
 
     public void hienThiKhachHang() {
+        if (danhSachKhachHang.isEmpty()) {
+            System.out.println("Không có khách hàng nào trong danh sách.");
+            return;
+        }
+
         for (Customer c : danhSachKhachHang) {
             System.out.println("Mã KH: " + c.customerID);
             System.out.println("Tên: " + c.name);
@@ -31,18 +46,28 @@ public class CustomerManager {
     }
 
     public ArrayList<Customer> chinhSuaKhachHang(String customerID) {
-        for (Customer c : danhSachKhachHang) {
-            if (c.customerID.equals(customerID)) {
-                System.out.print("Nhập tên mới: ");
-                String newName = scanner.nextLine();
+        try {
+            boolean found = false;
+            for (Customer c : danhSachKhachHang) {
+                if (c.customerID.equalsIgnoreCase(customerID)) {
+                    System.out.print("Nhập tên mới: ");
+                    String newName = scanner.nextLine();
 
-                System.out.print("Nhập số điện thoại mới: ");
-                String newPhone = scanner.nextLine();
+                    System.out.print("Nhập số điện thoại mới: ");
+                    String newPhone = scanner.nextLine();
 
-                c.name = newName;
-                c.phoneNumber = newPhone;
-                break;
+                    c.name = newName;
+                    c.phoneNumber = newPhone;
+                    System.out.println("Đã cập nhật thông tin cho khách hàng " + customerID);
+                    found = true;
+                    break;
+                }
             }
+            if (!found) {
+                System.out.println("Không tìm thấy khách hàng với mã: " + customerID);
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi khi chỉnh sửa khách hàng: " + e.getMessage());
         }
         return danhSachKhachHang;
     }
