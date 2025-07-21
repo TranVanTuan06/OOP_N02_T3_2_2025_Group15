@@ -1,14 +1,13 @@
 package com.cafe.menu;
 
-public class Person {
+public abstract class Person {
     protected String name;
 
     public Person(String name) {
         this.name = name;
     }
 
-    public void showInfo() {
-        System.out.println("Tên: " + name);
-    }
+    public String getName() { return name; }
+    public abstract void display();
 }
 
