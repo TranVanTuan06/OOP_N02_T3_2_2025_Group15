@@ -1,16 +1,13 @@
 public class tryUser {
     public static void main(String[] args) {
         try {
-            // Tạo đối tượng User bình thường
-            User user = new User("Nguyễn Văn troc", 1, "0987654321");
+            User user = new User("Nguyễn Văn troc", "1", "0987654321");
             System.out.println("Thông tin User: " + user);
 
-            // Tạo đối tượng Customer bằng cách thủ công
             Customer c = new Customer("C001", "Trần Thị B", "0912345678");
             System.out.println("Thông tin Customer: " + c);
 
-            // Tạo đối tượng Customer bằng reflection (nâng cao)
-            String className = "Customer"; // nếu có package thì thêm đầy đủ
+            String className = "Customer";
             Class<?> cl = Class.forName(className);
             Object obj = cl.getConstructor(String.class, String.class, String.class)
                           .newInstance("C002", "Lê Văn C", "0901122334");
