@@ -1,6 +1,6 @@
 public class tryDrinkShop {
     public static void main(String[] args) {
-        DrinkShopApp app = new DrinkShopApp();
+        DrinkShop app = new DrinkShop();
 
         try {
             Customer c1 = new Customer("C001", "Nguyễn Văn A", "0901234567");

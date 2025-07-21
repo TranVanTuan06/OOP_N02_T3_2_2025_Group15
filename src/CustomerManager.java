@@ -12,18 +12,14 @@ public class CustomerManager {
     }
 
     public ArrayList<Customer> xoaKhachHang(String customerID) {
-    boolean found = false;
-
-    for (int i = 0; i < danhSachKhachHang.size(); i++) {
-        Customer c = danhSachKhachHang.get(i);
-        if (c.getCustomerID().equals(customerID)) {
-            danhSachKhachHang.remove(i);
-            System.out.println(" Đã xoá khách hàng có mã: " + customerID);
-            found = true;
-            break;
+        for (int i = 0; i < danhSachKhachHang.size(); i++) {
+            if (danhSachKhachHang.get(i).getCustomerID().equals(customerID)) {
+                danhSachKhachHang.remove(i);
+                break;
+            }
         }
-    }
 
+    boolean found = false;
     if (!found) {
         System.out.println(" Không tìm thấy khách hàng với mã: " + customerID);
     }
@@ -44,7 +40,22 @@ public class CustomerManager {
         }
     }
 
+    public ArrayList<Customer> chinhSuaKhachHang(String customerID) {
+        for (Customer c : danhSachKhachHang) {
+            if (c.getCustomerID().equals(customerID)) {
+                System.out.print("Nhập tên mới: ");
+                String newName = scanner.nextLine();
 
+                System.out.print("Nhập số điện thoại mới: ");
+                String newPhone = scanner.nextLine();
+
+                c.setName(newName);
+                c.setPhoneNumber(newPhone);
+                break;
+            }
+        }
+        return danhSachKhachHang;
+    }
     public void dongScanner() {
         scanner.close();
     }

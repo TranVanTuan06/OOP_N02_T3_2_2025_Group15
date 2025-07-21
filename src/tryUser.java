@@ -3,7 +3,6 @@ public class tryUser {
         try {
             User user = new User("Nguyễn Văn troc", "1", "0987654321");
             System.out.println("Thông tin User: " + user);
-
             Customer c = new Customer("C001", "Trần Thị B", "0912345678");
             System.out.println("Thông tin Customer: " + c);
 

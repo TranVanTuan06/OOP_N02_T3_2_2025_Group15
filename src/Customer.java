@@ -13,4 +13,7 @@ public class Customer {
     public String getName() { return name; }
     public String getPhoneNumber() { return phoneNumber; }
     public void setName(String newName) { this.name = newName; }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }
