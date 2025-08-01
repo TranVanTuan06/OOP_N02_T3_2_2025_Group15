@@ -1,3 +1,4 @@
+package com.cafe;
 public class QuanCafe {
     private String tenQuan;
     private String diaChi;
