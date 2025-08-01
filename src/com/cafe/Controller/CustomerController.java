@@ -12,7 +12,7 @@ public class CustomerController {
         customerManager.addCustomer(customer);
     }
     public List<Customer> getCustomerList() {
-        return getCustomerList();
+        return customerManager.getCustomerListData();
     }
     public Customer findCustomerById(String id) {
         return customerManager.findById(id);

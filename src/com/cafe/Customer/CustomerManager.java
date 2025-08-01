@@ -21,8 +21,7 @@ public class CustomerManager {
         }
         System.out.println("Không tìm thấy khách hàng với mã: " + customerID);
         return false;
-
-}
+   }
 
     public void getCustomerList() {
         if (getCustomerList.isEmpty()) {
@@ -36,6 +35,11 @@ public class CustomerManager {
             System.out.println("--------------------");
         }
     }
+
+    public ArrayList<Customer> getCustomerListData() {
+    return getCustomerList;
+}
+
 
     public ArrayList<Customer> chinhSuaKhachHang(String customerID) {
         for (Customer c : getCustomerList) {
