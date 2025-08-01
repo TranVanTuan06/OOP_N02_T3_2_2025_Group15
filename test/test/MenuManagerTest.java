@@ -1,11 +1,18 @@
 package test;
+
 import com.cafe.menu.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class MenuManagerTest {
-    public static void main(String[] args) {
-        MenuManager menu = new MenuManager();
-        menu.addDrink(new Coffee("Cafe Sữa", 20000));
-        menu.addDrink(new Tea("Trà Chanh", 15000));
-        menu.displayMenu();
-        menu.serveAllDrinks();
+    @Test
+    public void testAddAndRemoveDrink() {
+        MenuManager manager = new MenuManager();
+        Drink coffee = new Drink("Cà phê", 25000);
+        manager.addDrink(coffee);
+
+        assertEquals(1, manager.getMenu().size());
+        assertTrue(manager.removeDrink("Cà phê"));
+        assertEquals(0, manager.getMenu().size());
     }
 }
