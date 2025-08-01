@@ -4,36 +4,32 @@ import java.util.Scanner;
 
 public class CustomerManager {
 
-    ArrayList<Customer> danhSachKhachHang = new ArrayList<>();
+    ArrayList<Customer> getCustomerList = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
-    public ArrayList<Customer> themKhachHang(Customer c) {
-        danhSachKhachHang.add(c);
-        return danhSachKhachHang;
+    public ArrayList<Customer> addCustomer(Customer c) {
+        getCustomerList.add(c);
+        return getCustomerList;
     }
 
-    public ArrayList<Customer> xoaKhachHang(String customerID) {
-        for (int i = 0; i < danhSachKhachHang.size(); i++) {
-            if (danhSachKhachHang.get(i).getCustomerID().equals(customerID)) {
-                danhSachKhachHang.remove(i);
-                break;
+    public boolean xoaKhachHang(String customerID) {
+        for (int i = 0; i < getCustomerList.size(); i++) {
+            if (getCustomerList.get(i).getCustomerID().equals(customerID)) {
+                getCustomerList.remove(i);
+                return true;
             }
         }
+        System.out.println("Không tìm thấy khách hàng với mã: " + customerID);
+        return false;
 
-    boolean found = false;
-    if (!found) {
-        System.out.println(" Không tìm thấy khách hàng với mã: " + customerID);
-    }
-
-    return danhSachKhachHang;
 }
 
-    public void hienThiKhachHang() {
-        if (danhSachKhachHang.isEmpty()) {
+    public void getCustomerList() {
+        if (getCustomerList.isEmpty()) {
             System.out.println("Không có khách hàng nào trong danh sách.");
             return;
         }
-        for (Customer c : danhSachKhachHang) {
+        for (Customer c : getCustomerList) {
             System.out.println("Mã KH: " + c.getCustomerID());
             System.out.println("Tên: " + c.getName());
             System.out.println("SĐT: " + c.getPhoneNumber());
@@ -42,7 +38,7 @@ public class CustomerManager {
     }
 
     public ArrayList<Customer> chinhSuaKhachHang(String customerID) {
-        for (Customer c : danhSachKhachHang) {
+        for (Customer c : getCustomerList) {
             if (c.getCustomerID().equals(customerID)) {
                 System.out.print("Nhập tên mới: ");
                 String newName = scanner.nextLine();
@@ -55,8 +51,17 @@ public class CustomerManager {
                 break;
             }
         }
-        return danhSachKhachHang;
+        return getCustomerList;
     }
+    public Customer findById(String customerID) {
+    for (Customer c : getCustomerList) {
+        if (c.getCustomerID().equals(customerID)) {
+            return c;
+        }
+    }
+    return null;
+}
+
     public void dongScanner() {
         scanner.close();
     }
