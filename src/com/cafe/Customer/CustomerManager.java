@@ -1,3 +1,4 @@
+package com.cafe.Customer;
 import java.util.ArrayList;
 import java.util.Scanner;
 

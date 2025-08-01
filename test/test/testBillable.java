@@ -1,3 +1,7 @@
+package test;
+import com.cafe.bill.Drink;
+import com.cafe.bill.Order;
+
 public class testBillable {
     public static void main(String[] args) {
         Order order = new Order();

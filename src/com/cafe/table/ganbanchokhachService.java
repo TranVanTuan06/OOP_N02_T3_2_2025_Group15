@@ -1,3 +1,4 @@
+package com.cafe.table;
 import java.util.*;
 public class ganbanchokhachService {
     private Map<String, String> danhSachGan = new HashMap<>();

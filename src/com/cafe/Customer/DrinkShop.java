@@ -1,6 +1,9 @@
+package com.cafe.Customer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.cafe.table.Table;
 
 public class DrinkShop {
     private List<Customer> customers = new ArrayList<>();

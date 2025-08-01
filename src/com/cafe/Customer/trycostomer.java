@@ -1,3 +1,4 @@
+package com.cafe.Customer;
 public class trycostomer {
     public static void main(String[] args) {
         try {

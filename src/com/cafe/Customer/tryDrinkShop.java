@@ -1,3 +1,6 @@
+package com.cafe.Customer;
+import com.cafe.table.Table;
+
 public class tryDrinkShop {
     public static void main(String[] args) {
         DrinkShop app = new DrinkShop();

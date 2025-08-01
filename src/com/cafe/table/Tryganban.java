@@ -1,3 +1,4 @@
+package com.cafe.table;
 public class Tryganban {
     public static void main(String[] args) {
         try {

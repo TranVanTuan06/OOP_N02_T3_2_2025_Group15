@@ -1,21 +1,8 @@
+package com.cafe.bill;
+
 import java.util.List;
 import java.util.ArrayList;
-interface Billable {
-    void calculateTotal();
-    void printReceipt();
-}
-class Drink {
-    private String name;
-    private int price;
-
-    public Drink(String name, int price) {
-        this.name = name;
-        this.price = price;
-    }
-    public int getPrice() { return price; }
-    public String getName() { return name; }
-}
-class Order implements Billable {
+public class Order implements Billable {
     private List<Drink> items = new ArrayList<>();
 
     public void addDrink(Drink d) {

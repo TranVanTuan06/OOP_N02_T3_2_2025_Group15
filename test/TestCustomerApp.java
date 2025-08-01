@@ -1,3 +1,6 @@
+import com.cafe.Customer.Customer;
+import com.cafe.Customer.CustomerManager;
+
 public class TestCustomerApp {
     public static void test() {
     try {

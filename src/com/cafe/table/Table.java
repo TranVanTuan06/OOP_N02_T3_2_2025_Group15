@@ -1,3 +1,4 @@
+package com.cafe.table;
 public class Table {
     private String tableID;
     private int capacity;
