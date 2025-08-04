@@ -1,4 +1,4 @@
-package com.cafe.main;
+package com.cafe.menu.main;
 
 import com.cafe.controller.MenuController;
 
