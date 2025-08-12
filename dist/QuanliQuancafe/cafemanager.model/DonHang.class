@@ -1,0 +1,88 @@
+package cafemanager.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DonHang {
+
+    private static int dem = 1;
+    private String maDon;
+    private String tenKhach;
+    private List<ChiTietDon> chiTiet;
+    private String ghiChu;
+
+    public DonHang() {
+
+    }
+
+    public DonHang(String tenKhach) {// tao new
+        this.tenKhach = tenKhach;
+        this.maDon = taoMaDonNgauNhien(10);
+        this.chiTiet = new ArrayList<>();
+    }
+
+    public DonHang(String tenKhach, String maDon) {// lay data
+        this.tenKhach = tenKhach;
+        this.maDon = maDon;
+        this.chiTiet = new ArrayList<>();
+    }
+
+    public static String taoMaDonNgauNhien(int doDai) {
+        String kyTu = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder ma = new StringBuilder();
+        java.util.Random random = new java.util.Random();
+
+        for (int i = 0; i < doDai; i++) {
+            int index = random.nextInt(kyTu.length());
+            ma.append(kyTu.charAt(index));
+        }
+
+        return ma.toString();
+    }
+
+    public void themChiTiet(ChiTietDon ct) {
+        chiTiet.add(ct);
+    }
+
+    public double tinhTongTien() {
+        return chiTiet.stream().mapToDouble(ChiTietDon::tinhTien).sum();
+    }
+
+    public void setRandomMa() {
+        maDon = taoMaDonNgauNhien(10);
+    }
+
+    public String getMaDon() {
+        return maDon;
+    }
+
+    public String getTenKhach() {
+        return tenKhach;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
+    public List<ChiTietDon> getChiTiet() {
+        return chiTiet;
+    }
+
+    public ChiTietDon getMon(String tenMon) {
+        for (ChiTietDon chiTietDon : chiTiet) {
+            if(chiTietDon.getMon().getTenMon().equals(tenMon.trim())){
+                return chiTietDon;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "ÄÆ¡n #" + maDon + " - " + tenKhach + " (" + tinhTongTien() + "Ä‘)";
+    }
+}
