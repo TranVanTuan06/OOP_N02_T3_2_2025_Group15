@@ -8,7 +8,6 @@ package cafemanager.view.panel;
  *
  * @author ADMIN
  */
-import cafemanager.model.ChiTietDon;
 import cafemanager.model.DonHang;
 import cafemanager.view.MainUI;
 import javax.swing.*;
