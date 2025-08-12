@@ -11,3 +11,4 @@ public class TinhTienPanel extends JPanel {
         add(label, BorderLayout.CENTER);
     }
 }
+

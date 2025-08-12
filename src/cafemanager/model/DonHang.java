@@ -5,7 +5,6 @@ import java.util.List;
 
 public class DonHang {
 
-    private static int dem = 1;
     private String maDon;
     private String tenKhach;
     private List<ChiTietDon> chiTiet;
