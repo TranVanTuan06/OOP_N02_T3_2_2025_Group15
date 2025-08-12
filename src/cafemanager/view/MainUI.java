@@ -114,10 +114,7 @@ public class MainUI extends JFrame {
         contentPanel.revalidate();
         contentPanel.repaint();
     }
-
-    private void showCard(String name) {
-        cardLayout.show(contentPanel, name);
-    }
+    
 
     private void handleLogout(ActionEvent e) {
         dispose();
