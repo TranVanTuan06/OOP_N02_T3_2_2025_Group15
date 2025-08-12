@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ThongKe>
+    <DonHang ma="ZAYT7E6NP3" ten="bàn 5">
+        <ChiTiet gia="11111.0" mon="Cà phê sữa" soLuong="12312"/>
+        <ChiTiet gia="11111.0" mon="Trà sữa" soLuong="12312"/>
+    </DonHang>
+    <DonHang ma="QLOX94STQB" ten="bàn 2">
+        <ChiTiet gia="56346.0" mon="Trà đào" soLuong="15125"/>
+    </DonHang>
+</ThongKe>
