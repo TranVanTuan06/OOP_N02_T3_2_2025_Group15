@@ -5,7 +5,6 @@ import cafemanager.model.DonHang;
 import cafemanager.model.Mon;
 import cafemanager.view.MainUI;
 
-import cafemanager.xml.DonHangXML;
 
 import javax.swing.*;
 import java.awt.*;
@@ -164,15 +163,6 @@ public class NhapDon extends JPanel {
     }
 
 
-    private boolean checkBan(String tenKH) {
-        for (DonHang dh : MainUI.listDonHang) {
-            if (tenKH.equals(dh.getTenKhach())) {
-                JOptionPane.showMessageDialog(null, "Bàn này đã có người đặt vui lòng chọn bàn khác");
-                return true;
-            }
-        }
-        return false;
-    }
 
     private int getSL(String sl) {
         try {
