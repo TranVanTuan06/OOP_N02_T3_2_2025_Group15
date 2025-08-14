@@ -70,9 +70,9 @@ public class TraDonPanel extends JPanel {
                 if (dh.getMaDon().equals(maDonStr)) {
                     List<ChiTietDon> chiTiet = dh.getChiTiet();
                     for (int j = 0; j < chiTiet.size(); j++) {
-                        if (chiTiet.get(j).getMon() != null
-                                && chiTiet.get(j).getMon().getTen() != null
-                                && chiTiet.get(j).getMon().getTen().equalsIgnoreCase(tenMon)) {
+                        ChiTietDon ct = chiTiet.get(j);
+                        String ten = ct.getTenMon() == null ? "" : ct.getTenMon();
+                        if (ten.equalsIgnoreCase(tenMon)) {
                             chiTiet.remove(j);
                             daXoa = true;
                             break;
@@ -227,9 +227,8 @@ public class TraDonPanel extends JPanel {
         for (int i = list.size() - 1; i >= 0; i--) {
             DonHang dh = list.get(i);
             for (ChiTietDon ct : dh.getChiTiet()) {
-                String tenMon = (ct.getMon() != null && ct.getMon().getTen() != null)
-                        ? ct.getMon().getTen() : "";
-                BigDecimal gia = (ct.getMon() != null) ? ct.getMon().getGia() : BigDecimal.ZERO;
+                String tenMon = ct.getTenMon() == null ? "" : ct.getTenMon();
+                BigDecimal gia = ct.getDonGia() == null ? BigDecimal.ZERO : ct.getDonGia();
                 BigDecimal tong = ct.tinhTien();
 
                 Object[] row = new Object[] {
@@ -281,9 +280,8 @@ public class TraDonPanel extends JPanel {
         List<Object[]> rows = new ArrayList<>();
         for (DonHang dh : donHangList) {
             for (ChiTietDon ct : dh.getChiTiet()) {
-                String tenMon = (ct.getMon() != null && ct.getMon().getTen() != null)
-                        ? ct.getMon().getTen() : "";
-                BigDecimal gia = (ct.getMon() != null) ? ct.getMon().getGia() : BigDecimal.ZERO;
+                String tenMon = ct.getTenMon() == null ? "" : ct.getTenMon();
+                BigDecimal gia = ct.getDonGia() == null ? BigDecimal.ZERO : ct.getDonGia();
                 BigDecimal tong = ct.tinhTien();
 
                 Object[] row = new Object[] {

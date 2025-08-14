@@ -2,7 +2,6 @@ package com.nocturne.cafemanagerweb.xml;
 
 import com.nocturne.cafemanagerweb.model.ChiTietDon;
 import com.nocturne.cafemanagerweb.model.DonHang;
-import com.nocturne.cafemanagerweb.model.Mon;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -64,13 +63,14 @@ public class DonHangXML {
 
                 for (ChiTietDon ct : dh.getChiTiet()) {
                     Element eCT = doc.createElement("ChiTiet");
-                    String tenMon = ct.getMon() != null ? safeStr(ct.getMon().getTen()) : "";
-                    BigDecimal gia = (ct.getMon() != null && ct.getMon().getGia() != null)
-                            ? ct.getMon().getGia() : BigDecimal.ZERO;
+
+                    String tenMon = safeStr(ct.getTenMon());
+                    BigDecimal gia = ct.getDonGia() == null ? BigDecimal.ZERO : ct.getDonGia();
+                    Integer soLuong = ct.getSoLuong() == null ? 0 : ct.getSoLuong();
 
                     eCT.setAttribute("mon", tenMon);
                     eCT.setAttribute("gia", gia.toPlainString());
-                    eCT.setAttribute("soLuong", String.valueOf(ct.getSoLuong()));
+                    eCT.setAttribute("soLuong", String.valueOf(soLuong));
                     eDon.appendChild(eCT);
                 }
                 root.appendChild(eDon);
@@ -104,14 +104,20 @@ public class DonHangXML {
                     String slStr     = eCT.getAttribute("soLuong");
 
                     BigDecimal gia = BigDecimal.ZERO;
-                    try { if (giaStr != null && !giaStr.isBlank()) gia = new BigDecimal(giaStr.trim()); }
-                    catch (NumberFormatException ignore) {}
+                    try {
+                        if (giaStr != null && !giaStr.isBlank()) {
+                            gia = new BigDecimal(giaStr.trim());
+                        }
+                    } catch (NumberFormatException ignore) {}
 
-                    int soLuong = 0;
-                    try { soLuong = Integer.parseInt(slStr.trim()); } catch (Exception ignore) {}
+                    Integer soLuong = 0;
+                    try {
+                        if (slStr != null && !slStr.isBlank()) {
+                            soLuong = Integer.parseInt(slStr.trim());
+                        }
+                    } catch (Exception ignore) {}
 
-                    Mon mon = new Mon(null, tenMonStr, gia);
-                    dh.themChiTiet(new ChiTietDon(mon, soLuong));
+                    dh.themChiTiet(new ChiTietDon(tenMonStr, soLuong, gia, null));
                 }
                 list.add(dh);
             }
@@ -135,13 +141,14 @@ public class DonHangXML {
 
                 for (ChiTietDon ct : dh.getChiTiet()) {
                     Element eCT = doc.createElement("ChiTiet");
-                    String tenMon = ct.getMon() != null ? safeStr(ct.getMon().getTen()) : "";
-                    BigDecimal gia = (ct.getMon() != null && ct.getMon().getGia() != null)
-                            ? ct.getMon().getGia() : BigDecimal.ZERO;
+
+                    String tenMon = safeStr(ct.getTenMon());
+                    BigDecimal gia = ct.getDonGia() == null ? BigDecimal.ZERO : ct.getDonGia();
+                    Integer soLuong = ct.getSoLuong() == null ? 0 : ct.getSoLuong();
 
                     eCT.setAttribute("mon", tenMon);
                     eCT.setAttribute("gia", gia.toPlainString());
-                    eCT.setAttribute("soLuong", String.valueOf(ct.getSoLuong()));
+                    eCT.setAttribute("soLuong", String.valueOf(soLuong));
                     eDon.appendChild(eCT);
                 }
                 root.appendChild(eDon);
@@ -174,14 +181,20 @@ public class DonHangXML {
                     String slStr     = eCT.getAttribute("soLuong");
 
                     BigDecimal gia = BigDecimal.ZERO;
-                    try { if (giaStr != null && !giaStr.isBlank()) gia = new BigDecimal(giaStr.trim()); }
-                    catch (NumberFormatException ignore) {}
+                    try {
+                        if (giaStr != null && !giaStr.isBlank()) {
+                            gia = new BigDecimal(giaStr.trim());
+                        }
+                    } catch (NumberFormatException ignore) {}
 
-                    int soLuong = 0;
-                    try { soLuong = Integer.parseInt(slStr.trim()); } catch (Exception ignore) {}
+                    Integer soLuong = 0;
+                    try {
+                        if (slStr != null && !slStr.isBlank()) {
+                            soLuong = Integer.parseInt(slStr.trim());
+                        }
+                    } catch (Exception ignore) {}
 
-                    Mon mon = new Mon(null, tenMonStr, gia);
-                    dh.themChiTiet(new ChiTietDon(mon, soLuong));
+                    dh.themChiTiet(new ChiTietDon(tenMonStr, soLuong, gia, null));
                 }
                 list.add(dh);
             }
@@ -191,4 +204,5 @@ public class DonHangXML {
         return list;
     }
 }
+
 
