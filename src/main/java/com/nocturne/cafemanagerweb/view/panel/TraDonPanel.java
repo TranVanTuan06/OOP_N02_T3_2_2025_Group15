@@ -5,19 +5,15 @@ import com.nocturne.cafemanagerweb.model.DonHang;
 import com.nocturne.cafemanagerweb.view.MainUI;
 import com.nocturne.cafemanagerweb.xml.DonHangXML;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 public class TraDonPanel extends JPanel {
 
@@ -28,7 +24,7 @@ public class TraDonPanel extends JPanel {
     private DefaultTableModel tableModel;
     private JLabel lblPage;
     private JTextField tfTimKiem;
-    private java.util.List<Object[]> allRows = new ArrayList<>();
+    private final List<Object[]> allRows = new ArrayList<>();
 
     public TraDonPanel() {
         setLayout(new BorderLayout());
@@ -51,14 +47,8 @@ public class TraDonPanel extends JPanel {
         searchPanel.add(btnXoa);
 
         btnTim.addActionListener(e -> {
-//            String search = tfTimKiem.getText();
-//            DonHang searchDH = timKiem(search);
-//            if (searchDH != null) {
-
             currentPage = 1;
             applyFilterAndDisplay();
-//            }
-
         });
 
         btnXoa.addActionListener(e -> {
@@ -80,7 +70,9 @@ public class TraDonPanel extends JPanel {
                 if (dh.getMaDon().equals(maDonStr)) {
                     List<ChiTietDon> chiTiet = dh.getChiTiet();
                     for (int j = 0; j < chiTiet.size(); j++) {
-                        if (chiTiet.get(j).getMon().getTenMon().equalsIgnoreCase(tenMon)) {
+                        if (chiTiet.get(j).getMon() != null
+                                && chiTiet.get(j).getMon().getTen() != null
+                                && chiTiet.get(j).getMon().getTen().equalsIgnoreCase(tenMon)) {
                             chiTiet.remove(j);
                             daXoa = true;
                             break;
@@ -113,10 +105,7 @@ public class TraDonPanel extends JPanel {
         // Cột
         String[] columns = {"Mã Đơn", " Khách Hàng", "Tên Món", "Số Lượng", "Giá", "Tổng"};
         tableModel = new DefaultTableModel(columns, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Không cho phép sửa dữ liệu trong bảng
-            }
+            @Override public boolean isCellEditable(int row, int column) { return false; }
         };
         table = new JTable(tableModel);
         add(new JScrollPane(table), BorderLayout.CENTER);
@@ -163,12 +152,11 @@ public class TraDonPanel extends JPanel {
                 return;
             }
 
-            // Lấy thông tin từ dòng đã chọn
             String tenKH = table.getValueAt(selectedRow, 1).toString().trim();
             List<DonHang> listRemove = new ArrayList<>();
             if (!tenKH.isEmpty()) {
                 for (DonHang donHang : MainUI.listDonHang) {
-                    if (donHang.getTenKhach().equals(tenKH)) {
+                    if (tenKhachEquals(donHang.getTenKhach(), tenKH)) {
                         listRemove.add(donHang);
                     }
                 }
@@ -188,8 +176,19 @@ public class TraDonPanel extends JPanel {
             );
             updateTable();
         });
+
         // Load dữ liệu ban đầu
         updateTable();
+    }
+
+    private static boolean tenKhachEquals(String a, String b) {
+        return a != null && b != null && a.equals(b);
+    }
+
+    private static String formatVND(BigDecimal amount) {
+        if (amount == null) amount = BigDecimal.ZERO;
+        DecimalFormat df = new DecimalFormat("#,###");
+        return df.format(amount).replace(",", ".") + "đ";
     }
 
     public DonHang timKiem(String text) {
@@ -203,9 +202,8 @@ public class TraDonPanel extends JPanel {
 
         for (DonHang donHang : list) {
             String maDonStr = String.valueOf(donHang.getMaDon());
-            String tenKhach = donHang.getTenKhach();
+            String tenKhach = donHang.getTenKhach() == null ? "" : donHang.getTenKhach();
 
-            // Loại bỏ dấu và so sánh
             String maDonNoAccent = removeDiacritics(maDonStr.toLowerCase());
             String tenKhachNoAccent = removeDiacritics(tenKhach.toLowerCase());
 
@@ -213,7 +211,7 @@ public class TraDonPanel extends JPanel {
                 return donHang;
             }
         }
-        return null; // không tìm thấy
+        return null;
     }
 
     public static String removeDiacritics(String input) {
@@ -222,19 +220,25 @@ public class TraDonPanel extends JPanel {
     }
 
     private void updateTable() {
-        List<DonHang> list = MainUI.listDonHang;
+        List<DonHang> list = MainUI.listDonHang != null ? MainUI.listDonHang : List.of();
         allRows.clear();
 
+        // Gom toàn bộ rows
         for (int i = list.size() - 1; i >= 0; i--) {
             DonHang dh = list.get(i);
             for (ChiTietDon ct : dh.getChiTiet()) {
-                Object[] row = new Object[]{
-                    dh.getMaDon(),
-                    dh.getTenKhach(),
-                    ct.getMon().getTenMon(),
-                    ct.getSoLuong(),
-                    String.format("%,.0f", ct.getMon().getGia()),
-                    String.format("%,.0f", ct.tinhTien())
+                String tenMon = (ct.getMon() != null && ct.getMon().getTen() != null)
+                        ? ct.getMon().getTen() : "";
+                BigDecimal gia = (ct.getMon() != null) ? ct.getMon().getGia() : BigDecimal.ZERO;
+                BigDecimal tong = ct.tinhTien();
+
+                Object[] row = new Object[] {
+                        dh.getMaDon(),
+                        dh.getTenKhach(),
+                        tenMon,
+                        ct.getSoLuong(),
+                        formatVND(gia),
+                        formatVND(tong)
                 };
                 allRows.add(row);
             }
@@ -244,36 +248,30 @@ public class TraDonPanel extends JPanel {
     }
 
     private void applyFilterAndDisplay() {
-        String keyword = removeDiacritics(tfTimKiem.getText().trim().toLowerCase());
-        List<DonHang> filteredDonHang = new ArrayList<>();
+        String kwRaw = tfTimKiem.getText() == null ? "" : tfTimKiem.getText();
+        String keyword = removeDiacritics(kwRaw.trim().toLowerCase());
 
-        for (DonHang dh : MainUI.listDonHang) {
-            String ma = removeDiacritics(String.valueOf(dh.getMaDon()).toLowerCase());
-            String ten = removeDiacritics(dh.getTenKhach().toLowerCase());
-
-            if (ma.contains(keyword) || ten.contains(keyword)) {
-                filteredDonHang.add(dh);
+        // Lọc theo mã đơn hoặc tên khách
+        List<Object[]> displayRows = new ArrayList<>();
+        for (Object[] row : allRows) {
+            String ma = removeDiacritics(String.valueOf(row[0]).toLowerCase());
+            String ten = removeDiacritics(String.valueOf(row[1]).toLowerCase());
+            if (keyword.isEmpty() || ma.contains(keyword) || ten.contains(keyword)) {
+                displayRows.add(row);
             }
         }
 
-        // Tạo dữ liệu dòng từ danh sách đơn hàng đã lọc
-        List<Object[]> allRows = getRowDataFromDonHangList(filteredDonHang);
-
         // Phân trang
-        int totalRows = allRows.size();
-        totalPages = (int) Math.ceil((double) totalRows / rowsPerPage);
-        if (currentPage > totalPages) {
-            currentPage = totalPages;
-        }
-        if (currentPage < 1) {
-            currentPage = 1;
-        }
+        int totalRows = displayRows.size();
+        totalPages = Math.max(1, (int) Math.ceil((double) totalRows / rowsPerPage));
+        if (currentPage > totalPages) currentPage = totalPages;
+        if (currentPage < 1) currentPage = 1;
 
         tableModel.setRowCount(0);
         int start = (currentPage - 1) * rowsPerPage;
         int end = Math.min(start + rowsPerPage, totalRows);
         for (int i = start; i < end; i++) {
-            tableModel.addRow(allRows.get(i));
+            tableModel.addRow(displayRows.get(i));
         }
 
         lblPage.setText("Trang " + currentPage + "/" + totalPages);
@@ -283,13 +281,18 @@ public class TraDonPanel extends JPanel {
         List<Object[]> rows = new ArrayList<>();
         for (DonHang dh : donHangList) {
             for (ChiTietDon ct : dh.getChiTiet()) {
-                Object[] row = new Object[]{
-                    dh.getMaDon(),
-                    dh.getTenKhach(),
-                    ct.getMon().getTenMon(),
-                    ct.getSoLuong(),
-                    String.format("%,.0f", ct.getMon().getGia()),
-                    String.format("%,.0f", ct.tinhTien())
+                String tenMon = (ct.getMon() != null && ct.getMon().getTen() != null)
+                        ? ct.getMon().getTen() : "";
+                BigDecimal gia = (ct.getMon() != null) ? ct.getMon().getGia() : BigDecimal.ZERO;
+                BigDecimal tong = ct.tinhTien();
+
+                Object[] row = new Object[] {
+                        dh.getMaDon(),
+                        dh.getTenKhach(),
+                        tenMon,
+                        ct.getSoLuong(),
+                        formatVND(gia),
+                        formatVND(tong)
                 };
                 rows.add(row);
             }
@@ -297,4 +300,5 @@ public class TraDonPanel extends JPanel {
         return rows;
     }
 }
+
 
