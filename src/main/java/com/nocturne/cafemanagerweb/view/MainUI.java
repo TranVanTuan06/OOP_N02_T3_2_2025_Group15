@@ -1,6 +1,6 @@
-package main.java.com.nocturne.cafemanagerweb.view;
+package com.nocturne.cafemanagerweb.view;
 
-import cafemanager.model.DonHang;
+import com.nocturne.cafemanagerweb.model.DonHang;
 import main.java.com.nocturne.cafemanagerweb.view.panel.NhapDon;
 import main.java.com.nocturne.cafemanagerweb.view.panel.ThongKePanel;
 import main.java.com.nocturne.cafemanagerweb.view.panel.TimKiemPanel;

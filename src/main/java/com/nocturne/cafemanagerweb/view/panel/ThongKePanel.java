@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package main.java.com.nocturne.cafemanagerweb.view.panel;
+package com.nocturne.cafemanagerweb.view.panel;
 
 /**
  *
  * @author ADMIN
  */
-import cafemanager.model.DonHang;
+import com.nocturne.cafemanagerweb.model.DonHang;
 import main.java.com.nocturne.cafemanagerweb.view.MainUI;
 
 import javax.swing.*;

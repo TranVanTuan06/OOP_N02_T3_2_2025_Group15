@@ -1,6 +1,6 @@
-package main.java.com.nocturne.cafemanagerweb.xml;
+package com.nocturne.cafemanagerweb.xml;
 
-import cafemanager.model.*;
+import com.nocturne.cafemanagerweb.model.*;
 import java.io.File;
 import java.util.*;
 import javax.xml.parsers.*;

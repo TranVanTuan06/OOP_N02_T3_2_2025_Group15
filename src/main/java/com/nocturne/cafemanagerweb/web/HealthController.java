@@ -1,4 +1,4 @@
-package main.java.com.nocturne.cafemanagerweb.web;
+package com.nocturne.cafemanagerweb.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
