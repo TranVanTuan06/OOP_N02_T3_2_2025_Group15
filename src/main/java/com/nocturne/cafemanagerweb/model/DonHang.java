@@ -39,15 +39,16 @@ public class DonHang {
     }
 
     public ChiTietDon getMon(String tenMon) {
-        if (tenMon == null) return null;
-        final String key = tenMon.trim();
-        return chiTiet.stream()
-                .filter(ct -> ct.getMon() != null
-                        && ct.getMon().getTenMon() != null
-                        && ct.getMon().getTenMon().trim().equals(key))
-                .findFirst()
-                .orElse(null);
-    }
+    if (tenMon == null) return null;
+    final String key = tenMon.trim();
+    return chiTiet.stream()
+            .filter(ct -> ct.getMon() != null
+                    && ct.getMon().getTen() != null   // <— đổi getTenMon() thành getTen()
+                    && ct.getMon().getTen().trim().equals(key))
+            .findFirst()
+            .orElse(null);
+}
+
 
     public BigDecimal tinhTongTien() {
         return chiTiet.stream()
