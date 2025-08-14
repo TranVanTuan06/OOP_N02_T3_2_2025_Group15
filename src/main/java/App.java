@@ -1,4 +1,4 @@
-package cafemanager;
+package main.java;
 
 import cafemanager.view.MainUI;
 
