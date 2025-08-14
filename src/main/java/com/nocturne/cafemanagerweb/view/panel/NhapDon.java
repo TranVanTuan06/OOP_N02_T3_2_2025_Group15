@@ -3,7 +3,7 @@ package com.nocturne.cafemanagerweb.view.panel;
 import com.nocturne.cafemanagerweb.model.ChiTietDon;
 import com.nocturne.cafemanagerweb.model.DonHang;
 import com.nocturne.cafemanagerweb.model.Mon;
-import main.java.com.nocturne.cafemanagerweb.view.MainUI;
+import com.nocturne.cafemanagerweb.view.MainUI;
 
 import javax.swing.*;
 import java.awt.*;

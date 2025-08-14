@@ -9,7 +9,7 @@ package com.nocturne.cafemanagerweb.view.panel;
  * @author ADMIN
  */
 import com.nocturne.cafemanagerweb.model.DonHang;
-import main.java.com.nocturne.cafemanagerweb.view.MainUI;
+import com.nocturne.cafemanagerweb.view.MainUI;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

@@ -1,12 +1,12 @@
 package com.nocturne.cafemanagerweb.view;
 
 import com.nocturne.cafemanagerweb.model.DonHang;
-import main.java.com.nocturne.cafemanagerweb.view.panel.NhapDon;
-import main.java.com.nocturne.cafemanagerweb.view.panel.ThongKePanel;
-import main.java.com.nocturne.cafemanagerweb.view.panel.TimKiemPanel;
-import main.java.com.nocturne.cafemanagerweb.view.panel.TinhTienPanel;
-import main.java.com.nocturne.cafemanagerweb.view.panel.TraDonPanel;
-import main.java.com.nocturne.cafemanagerweb.xml.DonHangXML;
+import com.nocturne.cafemanagerweb.view.panel.NhapDon;
+import com.nocturne.cafemanagerweb.view.panel.ThongKePanel;
+import com.nocturne.cafemanagerweb.view.panel.TimKiemPanel;
+import com.nocturne.cafemanagerweb.view.panel.TinhTienPanel;
+import com.nocturne.cafemanagerweb.view.panel.TraDonPanel;
+import com.nocturne.cafemanagerweb.xml.DonHangXML;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
