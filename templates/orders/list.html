@@ -1,26 +1,17 @@
 <!doctype html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: body">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><title>Đơn hàng</title></head>
 <body>
 <h2>Danh sách đơn</h2>
 <p><a th:href="@{/orders/new}">+ Nhập đơn</a></p>
-
-<table>
-  <thead>
-  <tr><th>Mã đơn</th><th>Khách</th><th>Ghi chú</th><th>Tổng tiền</th><th>Hành động</th></tr>
-  </thead>
-  <tbody>
+<table border="1" cellpadding="6">
+  <tr><th>Mã đơn</th><th>Khách</th><th>Ghi chú</th><th>Xem</th></tr>
   <tr th:each="o : ${orders}">
-    <td><a th:href="@{'/orders/' + ${o.maDon}}" th:text="${o.maDon}"></a></td>
-    <td th:text="${o.tenKhach}">Khách</td>
+    <td th:text="${o.maDon}"></td>
+    <td th:text="${o.tenKhach}"></td>
     <td th:text="${o.ghiChu}">-</td>
-    <td th:text="${o.tinhTongTien()}">0</td>
-    <td>
-      <form th:action="@{'/orders/' + ${o.maDon} + '/delete'}" method="post">
-        <button type="submit">Xoá</button>
-      </form>
-    </td>
+    <td><a th:href="@{'/orders/' + ${o.maDon}}">Chi tiết</a></td>
   </tr>
-  </tbody>
 </table>
 </body>
 </html>

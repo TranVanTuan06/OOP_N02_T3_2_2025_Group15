@@ -1,11 +1,13 @@
 <!doctype html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: body">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><title>Nhập đơn</title></head>
 <body>
 <h2>Nhập đơn mới</h2>
 <form th:action="@{/orders}" method="post" th:object="${order}">
-  <p><label>Tên khách: <input type="text" th:field="*{tenKhach}" placeholder="Nguyễn Văn A"></label></p>
-  <p><label>Ghi chú: <input type="text" th:field="*{ghiChu}" placeholder="Không đường, ít đá"></label></p>
+  <p><label>Tên khách: <input type="text" th:field="*{tenKhach}" required></label></p>
+  <p><label>Ghi chú: <input type="text" th:field="*{ghiChu}"></label></p>
   <button type="submit">Tạo đơn</button>
 </form>
+<p><a th:href="@{/orders}">← Quay lại</a></p>
 </body>
 </html>
