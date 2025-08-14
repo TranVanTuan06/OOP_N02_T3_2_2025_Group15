@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -16,36 +15,36 @@
   <artifactId>cafemanager-web</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>cafemanager-web</name>
-  <description>Ứng dụng quản lý quán cafe</description>
+  <description>Ứng dụng quản lý quán cafe (web)</description>
 
   <properties>
     <java.version>17</java.version>
-    <!-- ✨ CHỈ RÕ FQCN của class main -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>17</maven.compiler.release>
+    <!-- FQCN class main -->
     <start-class>com.nocturne.cafemanagerweb.CafemanagerWebApplication</start-class>
   </properties>
 
   <dependencies>
+    <!-- Web MVC -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
+    <!-- Thymeleaf -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
 
+    <!-- JPA/Hibernate -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-
+    <!-- Devtools (tự reload khi dev) -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
@@ -53,6 +52,7 @@
       <optional>true</optional>
     </dependency>
 
+    <!-- Kiểm thử -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -60,14 +60,43 @@
     </dependency>
   </dependencies>
 
+  <!-- Profiles để tách DB theo môi trường -->
+  <profiles>
+    <!-- DEV: dùng H2 -->
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <!-- PROD: dùng MySQL -->
+    <profile>
+      <id>prod</id>
+      <dependencies>
+        <dependency>
+          <groupId>com.mysql</groupId>
+          <artifactId>mysql-connector-j</artifactId>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
+
   <build>
     <plugins>
+      <!-- Plugin Spring Boot -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <!-- version thừa kế từ parent, có thể bỏ <version> -->
         <configuration>
-          <!-- ✨ Nói rõ main class cho plugin -->
           <mainClass>${start-class}</mainClass>
         </configuration>
       </plugin>
