@@ -1,41 +1,71 @@
 package com.nocturne.cafemanagerweb.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Embeddable
 public class ChiTietDon {
-    private Mon mon;
-    private int soLuong;
 
-    public ChiTietDon() {}
+    @Column(name = "ten_mon", length = 120, nullable = false)
+    private String tenMon;
 
-    public ChiTietDon(Mon mon, int soLuong) {
-        this.mon = mon;
-        this.soLuong = Math.max(0, soLuong);
+    @Column(name = "so_luong", nullable = false)
+    private Integer soLuong;
+
+    // Đơn giá VND; dùng BigDecimal để chính xác số học tiền tệ
+    @Column(name = "don_gia", precision = 19, scale = 2, nullable = false)
+    private BigDecimal donGia;
+
+    @Column(name = "ghi_chu", length = 300)
+    private String ghiChu;
+
+    public ChiTietDon() {
     }
 
+    public ChiTietDon(String tenMon, Integer soLuong, BigDecimal donGia, String ghiChu) {
+        this.tenMon = tenMon;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+        this.ghiChu = ghiChu;
+    }
+
+    /** Thành tiền = đơn giá * số lượng */
     public BigDecimal tinhTien() {
-        if (mon == null || mon.getGia() == null) return BigDecimal.ZERO;
-        return mon.getGia().multiply(BigDecimal.valueOf(soLuong));
+        if (soLuong == null || donGia == null) return BigDecimal.ZERO;
+        return donGia.multiply(BigDecimal.valueOf(soLuong.longValue()));
     }
 
-    public Mon getMon() { return mon; }
-    public void setMon(Mon mon) { this.mon = mon; }
+    // Getters/Setters
+    public String getTenMon() { return tenMon; }
+    public void setTenMon(String tenMon) { this.tenMon = tenMon; }
+    public Integer getSoLuong() { return soLuong; }
+    public void setSoLuong(Integer soLuong) { this.soLuong = soLuong; }
+    public BigDecimal getDonGia() { return donGia; }
+    public void setDonGia(BigDecimal donGia) { this.donGia = donGia; }
+    public String getGhiChu() { return ghiChu; }
+    public void setGhiChu(String ghiChu) { this.ghiChu = ghiChu; }
 
-    public int getSoLuong() { return soLuong; }
-    public void setSoLuong(int soLuong) { this.soLuong = Math.max(0, soLuong); }
+    @Override
+    public String toString() {
+        return tenMon + " x" + soLuong + " @" + donGia + " = " + tinhTien();
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ChiTietDon)) return false;
         ChiTietDon that = (ChiTietDon) o;
-        return Objects.equals(mon != null ? mon.getTen() : null,
-                              that.mon != null ? that.mon.getTen() : null);
+        return Objects.equals(tenMon, that.tenMon)
+            && Objects.equals(soLuong, that.soLuong)
+            && Objects.equals(donGia, that.donGia)
+            && Objects.equals(ghiChu, that.ghiChu);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mon != null ? mon.getTen() : null);
+        return Objects.hash(tenMon, soLuong, donGia, ghiChu);
     }
 }
+

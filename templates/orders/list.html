@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" th:replace="layout :: body">
+<body>
+<h2>Danh sách đơn</h2>
+<p><a th:href="@{/orders/new}">+ Nhập đơn</a></p>
+
+<table>
+  <thead>
+  <tr><th>Mã đơn</th><th>Khách</th><th>Ghi chú</th><th>Tổng tiền</th><th>Hành động</th></tr>
+  </thead>
+  <tbody>
+  <tr th:each="o : ${orders}">
+    <td><a th:href="@{'/orders/' + ${o.maDon}}" th:text="${o.maDon}"></a></td>
+    <td th:text="${o.tenKhach}">Khách</td>
+    <td th:text="${o.ghiChu}">-</td>
+    <td th:text="${o.tinhTongTien()}">0</td>
+    <td>
+      <form th:action="@{'/orders/' + ${o.maDon} + '/delete'}" method="post">
+        <button type="submit">Xoá</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,66 +1,78 @@
 package com.nocturne.cafemanagerweb.model;
 
+import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
+@Entity
+@Table(name = "don_hang")
 public class DonHang {
 
+    /** Khóa chính là mã đơn dạng chuỗi ngẫu nhiên (ví dụ 10 ký tự A-Z0-9) */
+    @Id
+    @Column(length = 32)
     private String maDon;
+
+    @Column(length = 150)
     private String tenKhach;
-    private final List<ChiTietDon> chiTiet = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(name = "don_hang_chi_tiet", joinColumns = @JoinColumn(name = "ma_don"))
+    private List<ChiTietDon> chiTiet = new ArrayList<>();
+
+    @Column(length = 500)
     private String ghiChu;
 
     public DonHang() {
         this.maDon = taoMaDonNgauNhien(10);
     }
 
-    public DonHang(String tenKhach) { // tạo mới
+    public DonHang(String tenKhach) {
         this.tenKhach = tenKhach;
         this.maDon = taoMaDonNgauNhien(10);
     }
 
-    public DonHang(String tenKhach, String maDon) { // khởi tạo với mã có sẵn
+    public DonHang(String tenKhach, String maDon) {
         this.tenKhach = tenKhach;
         this.maDon = (maDon == null || maDon.isBlank()) ? taoMaDonNgauNhien(10) : maDon;
     }
 
-    // ====== Business methods ======
+    // ====== Business ======
+
+    /** Thêm 1 dòng chi tiết (món) vào đơn */
     public void themChiTiet(ChiTietDon ct) {
-        if (ct != null) {
-            chiTiet.add(ct);
-        }
+        if (ct != null) chiTiet.add(ct);
     }
 
+    /** Xóa 1 dòng chi tiết (nếu tồn tại) */
     public boolean xoaChiTiet(ChiTietDon ct) {
         return chiTiet.remove(ct);
     }
 
+    /** Tìm món theo tên (so sánh chính xác sau trim) */
     public ChiTietDon getMon(String tenMon) {
-    if (tenMon == null) return null;
-    final String key = tenMon.trim();
-    return chiTiet.stream()
-            .filter(ct -> ct.getMon() != null
-                    && ct.getMon().getTen() != null   // <— đổi getTenMon() thành getTen()
-                    && ct.getMon().getTen().trim().equals(key))
-            .findFirst()
-            .orElse(null);
-}
-
-
-    public BigDecimal tinhTongTien() {
+        if (tenMon == null) return null;
+        final String key = tenMon.trim();
         return chiTiet.stream()
-                .map(ChiTietDon::tinhTien)                 // BigDecimal
-                .reduce(BigDecimal.ZERO, BigDecimal::add); // cộng an toàn
+                .filter(ct -> ct.getTenMon() != null && ct.getTenMon().trim().equals(key))
+                .findFirst()
+                .orElse(null);
     }
 
+    /** Tổng tiền đơn hàng = sum(thành tiền từng chi tiết) */
+    public BigDecimal tinhTongTien() {
+        return chiTiet.stream()
+                .map(ChiTietDon::tinhTien)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    /** Sinh mã mới (nếu cần) */
     public void taoMaNgauNhienMoi() {
         this.maDon = taoMaDonNgauNhien(10);
     }
 
-    // ====== Helpers ======
+    /** Helper: sinh mã đơn ngẫu nhiên */
     public static String taoMaDonNgauNhien(int doDai) {
         String kyTu = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder ma = new StringBuilder();
@@ -80,15 +92,19 @@ public class DonHang {
     public void setTenKhach(String tenKhach) { this.tenKhach = tenKhach; }
 
     public List<ChiTietDon> getChiTiet() { return chiTiet; }
+    public void setChiTiet(List<ChiTietDon> chiTiet) { this.chiTiet = chiTiet; }
 
     public String getGhiChu() { return ghiChu; }
     public void setGhiChu(String ghiChu) { this.ghiChu = ghiChu; }
 
-    // ====== toString/equals/hashCode ======
+    // ====== Debug/toString & equals/hashCode ======
     @Override
     public String toString() {
+        String items = chiTiet.stream()
+                .map(ChiTietDon::toString)
+                .collect(Collectors.joining(", "));
         return "Đơn #" + maDon + " - " + (tenKhach == null ? "N/A" : tenKhach)
-                + " (" + tinhTongTien() + " đ)";
+                + " (" + tinhTongTien() + " đ) [" + items + "]";
     }
 
     @Override
@@ -104,4 +120,6 @@ public class DonHang {
         return Objects.hash(maDon);
     }
 }
+
+
 

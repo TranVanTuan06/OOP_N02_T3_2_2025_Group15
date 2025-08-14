@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Quản Lý Quán Cafe</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Arial;margin:24px}
+    header nav a{margin-right:12px}
+    table{border-collapse:collapse;width:100%}
+    th,td{border:1px solid #ddd;padding:8px}
+    th{background:#f6f6f6;text-align:left}
+    form{display:inline}
+    input,button{padding:6px 8px;margin:4px 0}
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+    <a th:href="@{/orders}">Danh sách</a>
+    <a th:href="@{/orders/new}">Nhập đơn</a>
+    <a th:href="@{/h2-console}" target="_blank">H2 Console</a>
+  </nav>
+  <hr/>
+</header>
+<main>
+  <div th:insert="~{::body}"></div>
+</main>
+</body>
+</html>
