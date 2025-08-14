@@ -1,4 +1,4 @@
-package cafemanager.view;
+package main.java.com.nocturne.cafemanagerweb.view;
 
 import java.awt.*;
 import javax.swing.*;

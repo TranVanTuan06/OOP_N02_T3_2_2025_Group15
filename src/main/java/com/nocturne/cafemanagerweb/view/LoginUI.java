@@ -1,6 +1,7 @@
-package cafemanager.view;
+package main.java.com.nocturne.cafemanagerweb.view;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

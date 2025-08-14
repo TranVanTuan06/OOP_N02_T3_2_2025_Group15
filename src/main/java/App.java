@@ -1,6 +1,6 @@
 package main.java;
 
-import cafemanager.view.MainUI;
+import main.java.com.nocturne.cafemanagerweb.view.MainUI;
 
 public class App {
     public static void main(String[] args) {

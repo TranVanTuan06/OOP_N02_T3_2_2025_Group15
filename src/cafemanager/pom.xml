@@ -43,13 +43,19 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
+  
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <!-- nếu bạn không dùng parent spring-boot-starter-parent, thêm version -->
+      <version>3.3.2</version>
+      <configuration>
+        <mainClass>com.nocturne.cafemanagerweb.CafemanagerWebApplication</mainClass>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
 </project>
+

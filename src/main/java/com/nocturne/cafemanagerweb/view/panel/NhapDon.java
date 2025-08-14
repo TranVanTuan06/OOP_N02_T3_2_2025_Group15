@@ -1,10 +1,9 @@
-package cafemanager.view.panel;
+package main.java.com.nocturne.cafemanagerweb.view.panel;
 
 import cafemanager.model.ChiTietDon;
 import cafemanager.model.DonHang;
 import cafemanager.model.Mon;
-import cafemanager.view.MainUI;
-
+import main.java.com.nocturne.cafemanagerweb.view.MainUI;
 
 import javax.swing.*;
 import java.awt.*;
