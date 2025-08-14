@@ -14,4 +14,8 @@ public class Mon {
     public void setTen(String ten) { this.ten = ten; }
     public BigDecimal getGia() { return gia; }
     public void setGia(BigDecimal gia) { this.gia = gia; }
+    public Mon(String ten, double gia) {
+    this(null, ten, java.math.BigDecimal.valueOf(gia));
+}
+
 }
