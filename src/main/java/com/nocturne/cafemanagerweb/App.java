@@ -2,12 +2,15 @@ package com.nocturne.cafemanagerweb;
 
 import com.nocturne.cafemanagerweb.view.MainUI;
 
+import javax.swing.*;
+
 public class App {
     public static void main(String[] args) {
-        // ví dụ tạo UI (Swing) nếu MainUI là JFrame/JPanel...
-        MainUI ui = new MainUI();
-        // ui.setVisible(true); // nếu là JFrame
-        System.out.println("App started with MainUI");
+        SwingUtilities.invokeLater(() -> {
+            MainUI ui = new MainUI();  // giả sử MainUI extends JFrame
+            ui.setLocationRelativeTo(null); // canh giữa màn hình
+            ui.setVisible(true);
+        });
     }
 }
 
